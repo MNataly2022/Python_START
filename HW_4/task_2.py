@@ -9,9 +9,9 @@ from random import randint
 n = int(input("Введите натуральное число N "))
 my_list = [randint(0,n) for i in range(n)]
 print(my_list)
-result_list = []
 
-for number in my_list: 
-    if number not in result_list: 
-        result_list.append(number) 
-print(result_list)
+result_list = []
+for number in my_list:
+    if not my_list.count(number) > 1:
+        result_list.append(number)
+print(result_list) 
