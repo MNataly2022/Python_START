@@ -5,12 +5,12 @@
 Ввод: значение типа <str>. Вывод: значение числового типа данных
 """
 def calk(pstr):
-    if "-" in  pstr:
-        part_1, part_2 = pstr.split("-", 1)
-        result = float(calk(part_1)) - float(calk(part_2)) 
-    elif "+" in  pstr:
+    if "+" in  pstr:
         part_1, part_2 = pstr.split("+", 1)
-        result = float(calk(part_1)) + float(calk(part_2))
+        result = float(calk(part_1)) + float(calk(part_2)) 
+    elif "-" in  pstr:
+        part_1, part_2 = pstr.split("-", 1)
+        result = float(calk(part_1)) - float(calk(part_2))
     elif "*" in  pstr:
         part_1, part_2 = pstr.split("*", 1)
         result = float(calk(part_1)) * float(calk(part_2))
@@ -23,7 +23,11 @@ def calk(pstr):
 
 string = input("Введите арифметическое выражение:  ")
 string = ''.join(string.split())
-while "(" in string:
-    ss = string.split('(', 1)[1].split(')')[0]
-    string = string.replace('(' + ss +')', str(calk(ss)))
-print(f'{string} = {calk(string)}')
+string_ = string
+while "(" in string_:
+    ss = string_.split('(', 1)[1]
+    while ss.find('(') != -1 and ss.find('(') < ss.find(')'):
+        ss = ss.split('(', 1)[1]
+    ss = ss.split(')')[0]
+    string_ = string_.replace('('+ss+')', str(calk(ss)))
+print(f'{string} = {calk(string_)}')
